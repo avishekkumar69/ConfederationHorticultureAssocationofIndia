@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confederation Horticulture Association of India</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-color: #2E7D32; /* Deep Leaf Green */
+            --primary-dark: #1B5E20;
+            --accent-color: #F9A825; /* Golden Yellow for fruits/harvest */
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-light: #F1F8E9;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative; /* Important for dropdown positioning */
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            display: block;
+            padding: 10px 0;
+        }
+
+        .nav-links li a:hover, .nav-links li a.active {
+            color: var(--primary-color);
+        }
+
+        /* Dropdown Styling */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            min-width: 220px;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            padding: 10px 0;
+            z-index: 1001;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Show dropdown on hover */
+        .dropdown:hover .dropdown-menu {
+            display: flex;
+        }
+
+        .dropdown-menu li {
+            width: 100%;
+        }
+
+        .dropdown-menu li a {
+            padding: 10px 20px;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+        }
+
+        /* Dropdown Arrow */
+        .dropdown > a::after {
+            content: '\f107';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+
+        .join-btn {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            padding: 10px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+        }
+
+        .join-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .join-btn::after { display: none !important; }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+
+        /* --- MAIN SECTIONS --- */
+        main {
+            margin-top: 80px;
+            min-height: 80vh;
+        }
+
+        section {
+            display: none;
+            padding: 60px 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        section.active-section {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2.section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        p.section-subtitle {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
+            color: var(--text-light);
+        }
+
+        /* --- HOME SECTION & BACKGROUND --- */
+        .hero {
+            /* SPECIFIC HORTICULTURE BACKGROUND IMAGE */
+            background: linear-gradient(rgba(0, 20, 0, 0.6), rgba(0, 20, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            height: 85vh;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding-top: 80px;
+            border-radius: 0 0 50px 50px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #000;
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* --- MEMBERS SECTION --- */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .member-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .member-card:hover {
+            box-shadow: 0 8px 25px rgba(46, 125, 50, 0.2);
+        }
+
+        .member-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 20px;
+        }
+
+        .member-role {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- EVENTS SECTION --- */
+        .event-card {
+            display: flex;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .event-card:hover { transform: scale(1.01); }
+
+        .event-date {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .event-date span.day { font-size: 2rem; font-weight: 700; }
+        .event-date span.month { text-transform: uppercase; font-size: 0.9rem; }
+
+        .event-details {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .event-details h3 { color: var(--primary-color); margin-bottom: 5px; }
+        .event-meta { color: var(--text-light); font-size: 0.9rem; margin-bottom: 10px; }
+        .event-meta i { margin-right: 5px; color: var(--accent-color); }
+
+        /* --- CONTACT SECTION --- */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h3 { margin-bottom: 20px; color: var(--primary-color); }
+        .info-item { display: flex; align-items: center; margin-bottom: 20px; gap: 15px; }
+        .info-item i { font-size: 1.2rem; color: var(--accent-color); }
+
+        form { display: flex; flex-direction: column; gap: 15px; }
+        
+        input, textarea, select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(46, 125, 50, 0.2);
+        }
+
+        button[type="submit"] {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        button[type="submit"]:hover { background-color: var(--primary-dark); }
+
+        /* --- TOAST NOTIFICATION --- */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1001;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 17px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-content { max-width: 1200px; margin: 0 auto; }
+        .social-links { margin-top: 20px; }
+        .social-links a { color: var(--white); margin: 0 10px; font-size: 1.5rem; transition: var(--transition); }
+        .social-links a:hover { color: var(--accent-color); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: flex-start; /* Align left for mobile */
+                padding: 20px;
+                transition: 0.4s;
+                overflow-y: auto;
+            }
+            .nav-links.active { right: 0; }
+            
+            /* Adjust Dropdown for Mobile */
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                display: none; /* Keep hidden initially */
+                background-color: #f9f9f9;
+                width: 100%;
+                padding-left: 20px;
+                box-shadow: none;
+            }
+            
+            /* On mobile, we might need JS to toggle dropdowns, 
+               but for this CSS-only version, we can just stack them 
+               or use a click approach. 
+               Here: We'll make the dropdown menu always visible if the parent is hovered, 
+               or just list them flat for better UX in simple template. 
+               For this code, let's keep the hover logic but ensure it fits. */
+            .dropdown:hover .dropdown-menu { display: flex; position: static; box-shadow: none; padding-left: 20px;}
+
+            .hero-content h1 { font-size: 2.5rem; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .event-card { flex-direction: column; }
+            .event-date { flex-direction: row; gap: 10px; padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav>
+            <a href="#" class="logo" onclick="showSection('home')">
+                <i class="fa-solid fa-leaf"></i>
+                CHAI
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-list">
+                <li><a href="#" class="active" onclick="showSection('home')">Home</a></li>
+                
+                <!-- DROPDOWN MENU START -->
+                <li class="dropdown">
+                    <a href="#" onclick="showSection('about')">About Us</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Our History</a></li>
+                        <li><a href="#">Mission & Vision</a></li>
+                        <li><a href="#">Governing Council</a></li>
+                        <li><a href="#">Constitution</a></li>
+                    </ul>
+                </li>
+                <!-- DROPDOWN MENU END -->
+
+                <li><a href="#" onclick="showSection('members')">Members</a></li>
+                <li><a href="#" onclick="showSection('events')">Events</a></li>
+                <li><a href="#" class="join-btn" onclick="showSection('contact')">Join Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HOME SECTION -->
+        <section id="home" class="active-section">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Cultivating the Future of India</h1>
+                    <p>Confederation Horticulture Association of India (CHAI) is dedicated to the advancement of horticulture research, development, and education across the nation.</p>
+                    <a href="#" class="btn btn-primary" onclick="showSection('about')">Explore More</a>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-seedling"></i>
+                        <h3>Research & Innovation</h3>
+                        <p>Promoting cutting-edge research in sustainable horticulture practices and crop improvement.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-users"></i>
+                        <h3>Farmer Empowerment</h3>
+                        <p>Connecting farmers with experts, markets, and government schemes for better livelihoods.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                        <h3>Market Access</h3>
+                        <p>Facilitating trade fairs and exhibitions to boost the export potential of Indian horticulture.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About CHAI</h2>
+                <p class="section-subtitle">Bridging the gap between nature and technology.</p>
+                
+                <div style="background: white; padding: 40px; border-radius: 10px; box-shadow: var(--shadow); display: flex; gap: 40px; flex-wrap: wrap; align-items: center;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <img src="https://images.unsplash.com/photo-1592982537447-6f2a6a0c7c18?q=80&w=800&auto=format&fit=crop" alt="Horticulture Research" style="width: 100%; border-radius: 10px; border: 5px solid var(--bg-light);">
+                    </div>
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary-color);">Our Mission</h3>
+                        <p style="margin-bottom: 20px;">The Confederation Horticulture Association of India (CHAI) acts as a unified voice for horticulturists, researchers, and policy makers. Established with a vision to make India a global leader in horticulture, we focus on:</p>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: var(--accent-color); margin-right: 10px;"></i> Enhancing productivity and quality of produce.</li>
+                            <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: var(--accent-color); margin-right: 10px;"></i> Post-harvest management and reduction of wastage.</li>
+                            <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: var(--accent-color); margin-right: 10px;"></i> Organizing national and international conferences.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MEMBERS SECTION -->
+        <section id="members">
+            <div class="container">
+                <h2 class="section-title">Our Leadership</h2>
+                <p class="section-subtitle">Meet the dedicated team driving the horticulture revolution.</p>
+                
+                <div class="members-grid" id="members-container">
+                    <!-- Member cards will be injected here via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- EVENTS SECTION -->
+        <section id="events">
+            <div class="container">
+                <h2 class="section-title">Upcoming Events</h2>
+                <p class="section-subtitle">Seminars, workshops, and exhibitions scheduled for this year.</p>
+                
+                <div id="events-container">
+                    <!-- Events will be injected here via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Join CHAI / Contact Us</h2>
+                <p class="section-subtitle">Have questions? Want to become a member? Reach out to us.</p>
+
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h3>Headquarters</h3>
+                        <div class="info-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <p>IIHR Campus, Hesaraghatta Lake Post,<br>Bengaluru, Karnataka 560089</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <p>+91 80 2846 6512</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <p>info@chai-india.org</p>
+                        </div>
+                        <div style="margin-top: 30px;">
+                            <p><strong>Office Hours:</strong><br>Mon - Fri: 9:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+
+                    <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                        <input type="email" id="email" placeholder="Email Address" required>
+                        <select id="subject">
+                            <option value="Membership Inquiry">Membership Inquiry</option>
+                            <option value="Event Registration">Event Registration</option>
+                            <option value="General Question">General Question</option>
+                        </select>
+                        <textarea id="message" rows="5" placeholder="How can we help you?" required></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <h3>Confederation Horticulture Association of India</h3>
+            <p>Growing together for a greener tomorrow.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">&copy; 2023 CHAI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATION ELEMENT -->
+    <div id="toast">Message Sent Successfully!</div>
+
+    <script>
+        // --- DATA: Members & Events ---
+        const membersData = [
+            { name: "Dr. R. S. Paroda", role: "President", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop" },
+            { name: "Dr. K. L. Chadha", role: "Vice President", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop" },
+            { name: "Dr. M. R. Sood", role: "Secretary", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop" },
+            { name: "Smt. Anjali Rao", role: "Treasurer", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop" },
+            { name: "Dr. Peter Griffin", role: "Research Head", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop" },
+            { name: "Dr. Lois Lane", role: "Events Coordinator", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop" }
+        ];
+
+        const eventsData = [
+            { title: "National Horticulture Congress 2023", date: "15", month: "Nov", location: "New Delhi", desc: "Annual gathering of horticulturists discussing climate resilient technologies." },
+            { title: "Organic Farming Workshop", date: "05", month: "Dec", location: "Pune, Maharashtra", desc: "Hands-on training for transitioning to organic vegetable cultivation." },
+            { title: "Floriculture Expo", date: "20", month: "Jan", location: "Bangalore, Karnataka", desc: "Exhibition showcasing new varieties of flowers and floriculture tech." }
+        ];
+
+        // --- FUNCTIONS ---
+
+        // 1. Navigation Logic
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(sec => {
+                sec.classList.remove('active-section');
+            });
+            // Show target section
+            document.getElementById(sectionId).classList.add('active-section');
+            
+            // Update Nav Active State
+            document.querySelectorAll('.nav-links > li > a').forEach(link => {
+                link.classList.remove('active');
+            });
+            // Find the link that called this
+            // Note: This simple logic works for top-level links. Dropdown links won't highlight the parent perfectly without more complex JS.
+            const activeLink = Array.from(document.querySelectorAll('.nav-links > li > a')).find(a => a.getAttribute('onclick') && a.getAttribute('onclick').includes(sectionId));
+            if(activeLink) activeLink.classList.add('active');
+
+            // Close mobile menu if open
+            document.getElementById('nav-list').classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // 2. Render Members
+        function renderMembers() {
+            const container = document.getElementById('members-container');
+            container.innerHTML = membersData.map(member => `
+                <div class="member-card">
+                    <img src="${member.img}" alt="${member.name}" class="member-img">
+                    <div class="member-info">
+                        <div class="member-role">${member.role}</div>
+                        <h3 class="member-name">${member.name}</h3>
+                        <button class="btn" style="border:1px solid var(--primary-color); color:var(--primary-color); padding: 5px 15px; font-size: 0.8rem;">View Profile</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 3. Render Events
+        function renderEvents() {
+            const container = document.getElementById('events-container');
+            container.innerHTML = eventsData.map(event => `
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="day">${event.date}</span>
+                        <span class="month">${event.month}</span>
+                    </div>
+                    <div class="event-details">
+                        <h3>${event.title}</h3>
+                        <div class="event-meta">
+                            <i class="fa-solid fa-location-dot"></i> ${event.location}
+                        </div>
+                        <p>${event.desc}</p>
+                        <a href="#" style="color: var(--primary-color); font-weight: 600; font-size: 0.9rem; margin-top: 10px; display: inline-block;">Read More &rarr;</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 4. Handle Form Submit
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            
+            // Simulate processing
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                showToast(`Thank you, ${name}! We have received your message.`);
+                
+                // Reset form
+                e.target.reset();
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }, 1500);
+        }
+
+        // 5. Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        // 6. Mobile Menu Toggle
+        document.getElementById('mobile-menu').addEventListener('click', () => {
+            document.getElementById('nav-list').classList.toggle('active');
+        });
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMembers();
+            renderEvents();
+        });
+
+    </script>
+</body>
+</html>
